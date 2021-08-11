@@ -1,0 +1,17 @@
+@mixin colors($color){
+    background-color: $color;
+    color: $light;
+}
+.btn {
+    border: none;
+    border-radius: 5px;
+    padding: 15px 40px;
+    font-size: 1em;
+    &-primary {
+       @include colors($primary);
+    }
+    &:hover {
+        background: lighten($primary, 10%);
+        cursor: pointer;
+    }
+}

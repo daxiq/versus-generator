@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>VS Generator</title>
+</head>
+<body>
+    <main>
+        <h1 class="title light">Versus Generator</h1>
+        <section class="inputs-section">
+            <input type="file" id="left-file" onchange="VSGenerator.drawLeft(event)">
+            <input type="file" id="right-file" onchange="VSGenerator.drawRight(event)">
+        </section>
+        <section class="canvas-section">
+            <canvas width="1366" height="720" id="canvas"></canvas>
+            <div class="labels d-flex">
+                <div class="col">
+                    <label for="left-file">
+                        <h2>+</h2>
+                        <p>Click</p>
+                    </label>
+                </div>
+                <div class="col">
+                    <label for="right-file">
+                        <h2>+</h2>
+                        <p>Click</p>
+                    </label>
+                </div>
+            </div>
+        </section>
+        <section class="name-inputs">
+            <div class="col">
+                <label for="left-name">Left Name: </label>
+                <input id="left-name" type="text" placeholder="John Doe" oninput="VSGenerator.nameLeft(event)">
+            </div>
+            <div class="col">
+                <label for="right-name">Right Name: </label>
+                <input id="right-name" placeholder="Mr Alderson" type="text" oninput="VSGenerator.nameRight(event)">
+            </div>
+        </section>
+        <section class="d-flex actions">
+            <div class="edit">
+                <button class="btn btn-primary" onclick="VSGenerator.clear()">Clear</button>
+            </div>
+            <div class="download">
+                <button class="btn btn-primary" onclick="VSGenerator.download()">Download</button>
+            </div>
+        </section>
+    </main>
+    <script src="./js/main.js" type="application/javascript"></script>
+</body>
+</html>

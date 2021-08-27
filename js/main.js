@@ -43,10 +43,12 @@ const VSGenerator = (() => {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle'
         ctx.fillText('VS', middleW, middleH + 5);
+        _checkInputs();
     }
 
     const clear = () => {
         ctx.clearRect(0, 0, width, height);
+        images = [];
         _drawFrame();
         _clearInputs();
         _checkInputs();
@@ -194,9 +196,10 @@ const VSGenerator = (() => {
     }
 
     const _clearInputs = () => {
-        var inputFiles = document.querySelectorAll('input[type="file"]');
+        var inputFiles = document.querySelectorAll('input');
         inputFiles.forEach(input => {
             input.value = '';
+            input.placeholder = '';
         });
     }
 

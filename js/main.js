@@ -212,9 +212,11 @@ const VSGenerator = (() => {
             if (input.value != '') {
                 label.classList.add('d-none');
                 col.classList.add('hide');
+                col.classList.add('behind');
             } else {
                 label.classList.remove('d-none');
                 col.classList.remove('hide');
+                col.classList.remove('behind');
             }
         });
     }
@@ -413,7 +415,7 @@ const VSGenerator = (() => {
 
     const _attachEvents = () => {
 
-        // canvas.addEventListener('click', _clickImage, false);
+        canvas.addEventListener('click', _clickImage, false);
         canvas.addEventListener('mousedown', _startDrag, false);
         // canvas.addEventListener('mousemove', _moveImage, false);
         canvas.addEventListener('mouseup', _endDrag, false);

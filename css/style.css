@@ -95,15 +95,17 @@ img {
   position: relative;
 }
 
-.canvas-section .labels {
+.canvas-section canvas {
+  z-index: 0;
+}
+
+.canvas-section .col {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-.canvas-section .labels .col {
+  z-index: 0;
   width: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -117,11 +119,20 @@ img {
           justify-content: center;
 }
 
-.canvas-section .labels .col.hide {
+.canvas-section .col.hide {
   height: 0%;
 }
 
-.canvas-section .labels label:not(.d-none) {
+.canvas-section .col:last-of-type {
+  left: unset;
+  right: 0;
+}
+
+.canvas-section .col.behind {
+  z-index: -1;
+}
+
+.canvas-section label:not(.d-none) {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -140,10 +151,9 @@ img {
   border-radius: 5px;
   padding: 40px;
   cursor: pointer;
-  z-index: 999;
 }
 
-.canvas-section .labels label:not(.d-none):hover {
+.canvas-section label:not(.d-none):hover {
   border-color: #a8dadc;
   color: #a8dadc;
 }

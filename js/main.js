@@ -221,40 +221,6 @@ const VSGenerator = (() => {
         });
     }
 
-    /* function _handleMouseDown(e) {
-        let canMouseX = parseInt(e.clientX - offsetX);
-        let canMouseY = parseInt(e.clientY - offsetY);
-        // set the drag flag
-        isDragging = true;
-        console.log('dragging!');
-    }
-
-    function _handleMouseUp(e) {
-        let canMouseX = parseInt(e.clientX - offsetX);
-        let canMouseY = parseInt(e.clientY - offsetY);
-        // clear the drag flag
-        isDragging = false;
-    }
-
-    function _handleMouseOut(e) {
-        let canMouseX = parseInt(e.clientX - offsetX);
-        let canMouseY = parseInt(e.clientY - offsetY);
-        // user has left the canvas, so clear the drag flag
-        //isDragging=false;
-    }
-
-    function _handleMouseMove(e) {
-        let canMouseX = parseInt(e.clientX - offsetX);
-        let canMouseY = parseInt(e.clientY - offsetY);
-        // if the drag flag is set, clear the canvas and draw the image
-        if (isDragging) {
-            // ctx.clearRect(0, 0, width, height);
-            if (images.length > 0) {
-                ctx.drawImage(images[0].x, canMouseX - 128 / 2, canMouseY - 120 / 2, 128, 120);
-            }
-        }
-    } */
-
     var _initEvent = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -264,160 +230,81 @@ const VSGenerator = (() => {
     }
 
     const _clickImage = (e) => {
-        console.log('click');
+        var posX = e.clientX - 55;
+        if ( posX < middleW ) {
+            return 0;
+        }
+        return 1;
     }
 
     const _startDrag = (e) => {
         /* TODO */
-        var circle,
-            i,
-            j;
-
         _initEvent(e);
 
         // Test each image to see if mouse is in it
-        isDragging = false;
-
-        /* for (let i = 0; i < images.length; i++) {
-            image = images[i].image;
-
-            if (_isImage(image, mouse, width, height)) {
-                image = images[i].image;
-                target = images[i].id;
-                startDragging = true;
-                startX = mouse.x;
-                startY = mouse.y;
-            }
-        } */
+        isDragging = true;
+        startDragging = true;
     }
 
     const _moveImage = (e) => {
         /* TODO */
-        // var slide,
-        //     circle,
-        //     circle2,
-        //     i,
-        //     j,
-        //     k,
-        //     dx,
-        //     dy;
+        var image,
+            i,
+            startX,
+            startY,
+            inicioX,
+            movimientoX,
+            dx,
+            dy;
 
-        // _initEvent(e);
+        _initEvent(e);
 
-        // if (startDragging && (Math.abs(mouse.x - startX) > 20 || (Math.abs(mouse.y - startY) > 20))) {
+        i = _clickImage(e);
+        
+        
+        image = images[i].image;
+        image.isDragging = true;
+        startX = image.x;
+        startY = image.y;
 
-        //     isDragging = true;
-        //     startDragging = false;
-        //     slide = _getSlideById(startSlide);
-        //     slide.circle.isDragging = true;
-        // }
+        if (isDragging) {
+            
+            dx = mouse.x - startX;
+            dy = mouse.y - startY;
+            
+            if (image.isDragging) {
+                image.x += dx;
+                image.y += dy;
+            }
+            
+            startX = mouse.x;
+            startY = mouse.y;
 
-        // if (isDragging) {
-        //     // calculate the distance the mouse has moved
-        //     // since the last mousemove
-        //     dx = mouse.x - startX;
-        //     dy = mouse.y - startY;
-
-        //     // move each circle that isDragging
-        //     // by the distance the mouse has moved
-        //     // since the last mousemove
-        //     for (i = 0; i < slides.length; i++) {
-        //         circle = slides[i].circle;
-
-        //         if (circle.isDragging) {
-        //             if (circle.isActive) {
-        //                 circle.slice.x += dx;
-        //                 circle.slice.y += dy;
-
-        //                 // Active circle for not direct relations
-        //                 for (j = 0; j < slides.length; j++) {
-        //                     circle2 = slides[j].circle;
-        //                     circle2.isActive = true;
-
-        //                     if (_isCircle(circle2, mouse, radius)) {
-        //                         endSlide = slides[j].id;
-
-        //                         for (k = 0; k < circle2.slices.length; k++) {
-        //                             if (_isSlice(circle2, mouse, circle2.slices[k]) && !circle2.slices[k].isDisabled) {
-        //                                 endSlice = k;
-        //                             }
-        //                         }
-        //                     }
-        //                 }
-        //             } else {
-        //                 slides[i].circle.x += dx;
-        //                 slides[i].circle.y += dy;
-        //             }
-
-        //             break;
-        //         }
-        //     }
-
-        //     // Reset the starting mouse position for the next mousemove
-        //     startX = mouse.x;
-        //     startY = mouse.y;
-
-        //     // Draw canvas
-        //     _drawCanvas();
-        // }
+            // Draw canvas
+            _drawCanvas();
+        }
     }
 
     const _endDrag = (e) => {
-        /* TODO */
-        // var slide,
-        //     circle,
-        //     i,
-        //     j;
+        var image,
+            i;
 
-        // _initEvent(e);
+        _initEvent(e);
 
-        // // Create a not direct relation
-        // if (startSlide !== null && endSlide !== null && startSlide !== endSlide) {
-        //     slide = _getSlideById(endSlide);
-        //     circle = slide.circle;
+        // Clear all the dragging flags
+        for (i = 0; i < images.length; i++) {
+            image = images[i];
+            image.isDragging = false;
+        }
 
-        //     for (i = 0; i < circle.slices.length; i++) {
-        //         if (_isSlice(circle, mouse, circle.slices[i]) && !circle.slices[i].isDisabled) {
-        //             _newRelation(startSlide, endSlide, startSlice, endSlice);
-        //             break;
-        //         }
-        //     }
-        // }
-
-        // // Clear all the dragging flags
-        // for (i = 0; i < slides.length; i++) {
-        //     circle = slides[i].circle;
-        //     circle.isDragging = false;
-        //     circle.slice = {};
-
-        //     if (isDragging && slides[i].circle.isActive) {
-        //         circle.isActive = _getSlideId(startSlide) === i;
-        //     }
-
-        //     for (j = 0; j < circle.slices.length; j++) {
-        //         circle.slices[j].isHover = false;
-        //     }
-        // }
-
-        // isDragging = false;
-        // startDragging = false;
+        isDragging = false;
+        startDragging = false;
     }
-
-    /* const _handlers = () => {
-        canvas.addEventListener('click', function(){
-            console.log('click');
-        });
-        canvas.addEventListener('mousedown', _handleMouseDown, false);
-        canvas.addEventListener('mousemove', _handleMouseMove, false);
-        canvas.addEventListener('mouseup', _handleMouseUp, false);
-        canvas.addEventListener('mouseout', _handleMouseOut, false);
-    } */
 
     const _attachEvents = () => {
 
-        canvas.addEventListener('click', _clickImage, false);
         canvas.addEventListener('mousedown', _startDrag, false);
-        // canvas.addEventListener('mousemove', _moveImage, false);
+        canvas.addEventListener('mousemove', _moveImage, false);
         canvas.addEventListener('mouseup', _endDrag, false);
         window.addEventListener('resize', _drawCanvas, false);
     }
@@ -430,11 +317,6 @@ const VSGenerator = (() => {
             width = canvas.width;
             middleH = height / 2;
             middleW = width / 2;
-
-            /* canvasOffset = canvas.offset();
-            offsetX=canvasOffset.left;
-            offsetY=canvasOffset.top;
-            isDragging=false; */
         }
 
         _drawCanvas();

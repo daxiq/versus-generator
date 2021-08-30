@@ -35,7 +35,7 @@ main {
       -ms-flex-align: center;
           align-items: center;
   padding: 40px;
-  max-width: 1400px;
+  max-width: 1368px;
   margin: 0 auto;
 }
 
@@ -43,7 +43,6 @@ canvas {
   border: 1px solid gray;
   width: 100%;
   aspect-ratio: 16/9;
-  margin: 15px 0;
   border-radius: 5px;
   max-width: 1368px;
   position: relative;
